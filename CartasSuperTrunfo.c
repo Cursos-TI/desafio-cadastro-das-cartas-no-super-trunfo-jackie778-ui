@@ -1,22 +1,45 @@
 #include <stdio.h>
+#include <string.h>
 
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-//Teste larissa
+#define NUM_ESTADOS 8
+#define NUM_CIDADES 4
+
+// Estrutura para representar uma carta
+typedef struct {
+    char codigo[4];
+    char nome[50];
+} Carta;
+
+void cadastrarCartas(Carta cartas[NUM_ESTADOS][NUM_CIDADES]) {
+    char estados[NUM_ESTADOS] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
+
+    for (int i = 0; i < NUM_ESTADOS; i++) {
+        for (int j = 0; j < NUM_CIDADES; j++) {
+            // Gerar o código da carta
+            sprintf(cartas[i][j].codigo, "%c%02d", estados[i], j + 1);
+
+            // Ler o nome da carta
+            printf("Digite o nome para a carta %s: ", cartas[i][j].codigo);
+            scanf(" %[^\n]", cartas[i][j].nome);
+        }
+    }
+}
+
+void exibirCartas(Carta cartas[NUM_ESTADOS][NUM_CIDADES]) {
+    printf("\nCartas cadastradas:\n");
+    for (int i = 0; i < NUM_ESTADOS; i++) {
+        for (int j = 0; j < NUM_CIDADES; j++) {
+            printf("Código: %s, Nome: %s\n", cartas[i][j].codigo, cartas[i][j].nome);
+        }
+    }
+}
 
 int main() {
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
-    
-    // Cadastro das Cartas:
-    // Sugestão: Utilize a função scanf para capturar as entradas do usuário para cada atributo.
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
-    
-    // Exibição dos Dados das Cartas:
-    // Sugestão: Utilize a função printf para exibir as informações das cartas cadastradas de forma clara e organizada.
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
+    Carta cartas[NUM_ESTADOS][NUM_CIDADES];
+
+    printf("Cadastro de Cartas do Super Trunfo - Tema: Países\n");
+    cadastrarCartas(cartas);
+    exibirCartas(cartas);
 
     return 0;
 }
